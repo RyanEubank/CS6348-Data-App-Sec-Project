@@ -1,0 +1,14 @@
+services:
+  pts:
+    build: .
+    container_name: benchmark_container
+    entrypoint: /bin/bash
+    stdin_open: true 
+    tty: true
+    ports:
+      - "${PHOROMATIC_HTTP_PORT}:${PHOROMATIC_HTTP_PORT}"
+      - "${PTS_WEBSOCKET_PORT}:${PTS_WEBSOCKET_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./test_results:/var/lib/phoronix-test-suite/test-results
