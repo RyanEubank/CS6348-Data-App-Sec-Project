@@ -11,4 +11,4 @@ services:
     env_file:
       - .env
     volumes:
-      - ./test_results:/var/lib/phoronix-test-suite/test-results
+      - ./test-results:/var/lib/phoronix-test-suite/test-results
