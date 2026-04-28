@@ -18,8 +18,9 @@ RUN /usr/local/go/bin/go install github.com/codesenberg/bombardier@latest
 # Copy over test profiles
 RUN cp -va /var/lib/phoronix-test-suite/test-profiles/pts/nginx-2.0.1 /var/lib/phoronix-test-suite/test-profiles/local/nginx-custom
 RUN cp -va /var/lib/phoronix-test-suite/test-profiles/pts/openssl-3.0.1 /var/lib/phoronix-test-suite/test-profiles/local/openssl-custom
+RUN cp -va /var/lib/phoronix-test-suite/test-profiles/pts/opencv-1.1.0 /var/lib/phoronix-test-suite/test-profiles/local/opencv-custom
 
-# Copy over script fixes to the custom test profiles
+# Replace tests with script fixes to the custom test profiles
 WORKDIR /var/lib/phoronix-test-suite/test-profiles/local/nginx-custom
 COPY ./test-profiles/nginx-custom/install.sh ./install.sh
 COPY ./test-profiles/nginx-custom/test-definition.xml ./test-definition.xml
@@ -30,7 +31,14 @@ COPY ./test-profiles/openssl-custom/install.sh ./install.sh
 COPY ./test-profiles/openssl-custom/results-definition.xml ./results-definition.xml
 COPY ./test-profiles/openssl-custom/test-definition.xml ./test-definition.xml
 
+WORKDIR /var/lib/phoronix-test-suite/test-profiles/local/opencv-custom
+COPY ./test-profiles/opencv-custom/downloads.xml ./downloads.xml
+COPY ./test-profiles/opencv-custom/install.sh ./install.sh
+COPY ./test-profiles/opencv-custom/results-definition.xml ./results-definition.xml
+COPY ./test-profiles/opencv-custom/test-definition.xml ./test-definition.xml
+
 # Install the custom benchmarks
 WORKDIR /root
 RUN /phoronix-test-suite/phoronix-test-suite install nginx-custom
 RUN /phoronix-test-suite/phoronix-test-suite install openssl-custom
+RUN /phoronix-test-suite/phoronix-test-suite install opencv-custom
