@@ -15,10 +15,22 @@ RUN wget -o /usr/local/go1.26.2.linux-amd64.tar.gz https://go.dev/dl/go1.26.2.li
 RUN sudo tar -C /usr/local -xzf go1.26.2.linux-amd64.tar.gz && rm -rf /usr/localgo1.26.2.linux-amd64.tar.gz
 RUN /usr/local/go/bin/go install github.com/codesenberg/bombardier@latest
 
-# Copy over test profiles and script fixes
+# Copy over test profiles
 RUN cp -va /var/lib/phoronix-test-suite/test-profiles/pts/nginx-2.0.1 /var/lib/phoronix-test-suite/test-profiles/local/nginx-custom
+RUN cp -va /var/lib/phoronix-test-suite/test-profiles/pts/openssl-3.0.1 /var/lib/phoronix-test-suite/test-profiles/local/openssl-custom
+
+# Copy over script fixes to the custom test profiles
 WORKDIR /var/lib/phoronix-test-suite/test-profiles/local/nginx-custom
 COPY ./test-profiles/nginx-custom/install.sh ./install.sh
 COPY ./test-profiles/nginx-custom/test-definition.xml ./test-definition.xml
 
+WORKDIR /var/lib/phoronix-test-suite/test-profiles/local/openssl-custom
+COPY ./test-profiles/openssl-custom/downloads.xml ./downloads.xml
+COPY ./test-profiles/openssl-custom/install.sh ./install.sh
+COPY ./test-profiles/openssl-custom/results-definition.xml ./results-definition.xml
+COPY ./test-profiles/openssl-custom/test-definition.xml ./test-definition.xml
+
+# Install the custom benchmarks
 WORKDIR /root
+RUN /phoronix-test-suite/phoronix-test-suite install nginx-custom
+RUN /phoronix-test-suite/phoronix-test-suite install openssl-custom

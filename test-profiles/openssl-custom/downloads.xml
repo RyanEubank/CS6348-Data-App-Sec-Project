@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--Phoronix Test Suite v10.8.6-->
+<PhoronixTestSuite>
+  <Downloads>
+    <Package>
+      <URL>https://github.com/openssl/openssl/releases/download/openssl-4.0.0/openssl-4.0.0.tar.gz</URL>
+      <MD5>f26714e6398a2d921fc5616daaa75231</MD5>
+      <SHA256>c32cf49a959c4f345f9606982dd36e7d28f7c58b19c2e25d75624d2b3d2f79ac</SHA256>
+      <FileName>openssl-4.0.0.tar.gz</FileName>
+      <FileSize>55046677</FileSize>
+    </Package>
+  </Downloads>
+</PhoronixTestSuite>
