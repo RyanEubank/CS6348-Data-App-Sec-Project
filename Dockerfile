@@ -23,6 +23,7 @@ RUN cp -va /var/lib/phoronix-test-suite/test-profiles/pts/opencv-1.1.0 /var/lib/
 # Replace tests with script fixes to the custom test profiles
 WORKDIR /var/lib/phoronix-test-suite/test-profiles/local/nginx-custom
 COPY ./test-profiles/nginx-custom/install.sh ./install.sh
+COPY ./test-profiles/nginx-custom/pre.sh ./pre.sh
 COPY ./test-profiles/nginx-custom/test-definition.xml ./test-definition.xml
 
 WORKDIR /var/lib/phoronix-test-suite/test-profiles/local/openssl-custom
@@ -37,8 +38,4 @@ COPY ./test-profiles/opencv-custom/install.sh ./install.sh
 COPY ./test-profiles/opencv-custom/results-definition.xml ./results-definition.xml
 COPY ./test-profiles/opencv-custom/test-definition.xml ./test-definition.xml
 
-# Install the custom benchmarks
 WORKDIR /root
-RUN /phoronix-test-suite/phoronix-test-suite install nginx-custom
-RUN /phoronix-test-suite/phoronix-test-suite install openssl-custom
-RUN /phoronix-test-suite/phoronix-test-suite install opencv-custom

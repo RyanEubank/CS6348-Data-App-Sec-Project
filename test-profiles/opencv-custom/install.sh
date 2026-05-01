@@ -4,7 +4,7 @@ tar -xf opencv_extra-4.7.0.tar.gz
 cd opencv-4.7.0
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DWITH_OPENCL=OFF -DCMAKE_CXX_FLAGS="$CXXFLAGS" ..
+cmake -DCMAKE_BUILD_TYPE=Release -DWITH_OPENCL=OFF -DCMAKE_CXX_FLAGS="$CFLAGS" ..
 make -j $NUM_CPU_CORES
 echo $? > ~/install-exit-status
 cd ~

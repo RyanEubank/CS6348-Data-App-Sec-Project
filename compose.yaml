@@ -8,6 +8,7 @@ services:
     ports:
       - "${PHOROMATIC_HTTP_PORT}:${PHOROMATIC_HTTP_PORT}"
       - "${PTS_WEBSOCKET_PORT}:${PTS_WEBSOCKET_PORT}"
+      - "${NGINX_PORT}:${NGINX_PORT}"
     env_file:
       - .env
     volumes:
