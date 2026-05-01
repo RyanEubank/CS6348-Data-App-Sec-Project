@@ -8,7 +8,8 @@ RUN echo "alias pts='phoronix-test-suite'" >> ~/.bashrc
 # Install external dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    wget
+    wget \
+    checksec
 
 # Install latest version of golang via direct download - apt package is too old
 RUN wget -o /usr/local/go1.26.2.linux-amd64.tar.gz https://go.dev/dl/go1.26.2.linux-amd64.tar.gz

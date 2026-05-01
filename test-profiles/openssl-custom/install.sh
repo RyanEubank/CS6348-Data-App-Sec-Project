@@ -1,7 +1,19 @@
 #!/bin/sh
 tar -xf openssl-4.0.0.tar.gz
 cd openssl-4.0.0
-./config $CFLAGS no-zlib
+
+if [[ "$CFLAGS" == "$BASELINE_CFLAGS" ]]; then
+    ./Configure no-zlib CFLAGS="-fPIC -fno-stack-protector" LDFLAGS="-z execstack"
+elif [[ "$CFLAGS" == "$CANARY_CFLAGS" ]]; then 
+    ./Configure no-zlib CFLAGS="-fPIC" LDFLAGS="-z execstack"
+elif [[ "$CFLAGS" == "$DEP_CFLAGS" ]]; then 
+    ./Configure no-zlib CFLAGS="-fPIC -fno-stack-protector" LDFLAGS=""
+elif [[ "$CFLAGS" == "$PIE_CFLAGS" ]]; then 
+    ./Configure no-zlib CFLAGS="-fPIC -fno-stack-protector" LDFLAGS="-z execstack"
+else
+    ./Configure no-zlib CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
+fi
+
 make -j $NUM_CPU_CORES
 echo $? > ~/install-exit-status
 cd ~

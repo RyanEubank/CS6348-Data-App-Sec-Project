@@ -6,7 +6,7 @@ tar -xf http-test-files-1.tar.xz
 tar -xf nginx-1.21.1.tar.gz
 
 cd nginx-1.21.1/
-CFLAGS="-Wno-error -O3 -march=native $CFLAGS" CXXFLAGS="-Wno-error -O3 -march=native $CFLAGS" ./configure --prefix=$HOME/nginx_ --without-http_rewrite_module --without-http-cache 
+./configure --prefix=$HOME/nginx_ --without-http_rewrite_module --without-http-cache --with-cc-opt="$CFLAGS" --with-ld-opt="$LDFLAGS"
 make -j $NUM_CPU_CORES
 echo $? > ~/install-exit-status
 make install
